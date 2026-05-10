@@ -131,3 +131,42 @@ dist
 
 # vscode extensions
 .vscode/
+
+#GO
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Specifically ignore the local binary and output directory we created
+helper-script/nicolasrenault.com/two-mi18n/helper-script
+dist/
+/tmp/
+
+# Test binary, debugging, and profiling files
+*.test
+*.out
+*.prof
+*.cgo1.go
+*.cgo2.c
+_cgo_defun.c
+_cgo_gotypes.go
+_cgo_export.*
+
+# Go workspace file
+go.work
+go.work.sum
+
+# Dependency directories (if you ever use 'go mod vendor')
+vendor/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE and Editor files
+.idea/
+.vscode/
+*.swp
