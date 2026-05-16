@@ -8,7 +8,8 @@ export default defineConfig({
 			title: "Two Mi18n",
 			customCss: ["./src/styles/custom.css"],
 			social: [
-				{ icon: 'github', label: 'GitHub', href: 'https://github.com/NicolasRenault/two-mi18n' }
+				{ icon: 'github', label: 'GitHub', href: 'https://github.com/NicolasRenault/two-mi18n' },
+				{ icon: 'npm', label: 'NPM', href: 'https://www.npmjs.com/package/two-mi18n' }
 			],
 			sidebar: [
 				{
