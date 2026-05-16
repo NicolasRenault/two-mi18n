@@ -52,6 +52,12 @@ export default defineConfig({
 						},
 					],
 				},
+				{
+					label: "Go Futher",
+					items: [
+						{ label: "Helper Script", link: "/go-further/helper-script" },
+					],
+				},
 			],
 		}),
 	],
