@@ -7,9 +7,9 @@ export default defineConfig({
 		starlight({
 			title: "Two Mi18n",
 			customCss: ["./src/styles/custom.css"],
-			social: {
-				github: "https://github.com/NicolasRenault/two-mi18n",
-			},
+			social: [
+				{ icon: 'github', label: 'GitHub', href: 'https://github.com/NicolasRenault/two-mi18n' }
+			],
 			sidebar: [
 				{
 					label: "Start Here",
