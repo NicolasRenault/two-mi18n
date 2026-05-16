@@ -43,12 +43,12 @@ export default defineConfig({
 					],
 				},
 				{
-					label: "References",
+					label: "Behavior",
 					items: [
-						{ label: "Fallbacks", link: "/references/fallbacks" },
+						{ label: "Fallbacks", link: "/behavior/fallbacks" },
 						{
 							label: "Errors",
-							link: "/references/errors",
+							link: "/behavior/errors",
 						},
 					],
 				},
