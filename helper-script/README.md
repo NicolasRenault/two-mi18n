@@ -1,7 +1,5 @@
----
-title: Helper Script
-description: Automatically extract translation keys from your project to generate your JSON translation object.
----
+# Helper Script
+> Automatically extract translation keys from your project to generate your JSON translation object.
 
 After using the library myself, I noticed that manually keeping track of all the `data-twomi18n` keys scattered across my project was a nightmare. 
 
@@ -70,6 +68,7 @@ Running the script will generate this exact JSON structure:
     "contact-me": "Contact me",
     "contact-button": ""
 }
+
 ```
 
 You can now directly copy this output into the `translations` object when initializing the `TwoMi18n` class in your Javascript!
