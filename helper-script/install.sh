@@ -2,7 +2,7 @@
 set -e
 
 # Config
-BASE_URL="https://dl.yourdomain.com/mycli/latest" #TODO Change when ready to move to prod
+BASE_URL="https://dl.yourdomain.com/mycli/latest" # TODO Change when ready to move to prod
 BINARY_NAME="twomi18n-helper-script"
 
 # 1. Detect OS/Arch

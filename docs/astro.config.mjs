@@ -40,6 +40,14 @@ export default defineConfig({
 							label: "translateHTML()",
 							link: "/usages/translate-html",
 						},
+						{
+							label: "Tips and Use Cases",
+							link: "/usages/tips-and-use-cases",
+						},
+						{
+							label: "Frameworks",
+							link: "/usages/frameworks",
+						},
 					],
 				},
 				{

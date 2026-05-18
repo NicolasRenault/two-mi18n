@@ -1,0 +1,191 @@
+---
+title: Tips and Use Cases
+---
+
+The Two Mi18n library is designed to be as minimalist as possible. However, you can easily expands it's behavior, with simple HTML, CSS, and Javascript tricks.
+
+## Attribute "translation"
+
+With the [bracket annotation](/usages/translate-html#translate-html-attributes), you can "translate" any `HTML Attribute`. You can use this to your advantage and change attributes like `src` for `<img>`, or `href` for `<a>`.
+
+> The library is using the [`Element.setAttribute()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute) method, so any valid attributes you put in the [bracket annotation](/usages/translate-html#translate-html-attributes) are going to work. 
+
+```html {2, 15, 19}
+<a 
+    href="https://en.wikipedia.org/wiki/Rickrolling"
+    data-twomi18n="click-here link-target[href]"
+>
+    Click here
+</a>
+
+[...]
+
+<script>
+	const translations = {
+        default: "en",
+		"en": {
+            "click-here": "Click here",
+            "link-target": "https://en.wikipedia.org/wiki/Rickrolling",
+        },
+        "fr": {
+            "click-here": "Cliquez ici",
+            "link-target": "https://fr.wikipedia.org/wiki/Rickroll",
+        }
+    }
+    const twoMi18n = new TwoMi18n(translations);
+
+    twomi18n.translateHTML("fr");
+</script>
+```
+
+This is going to change the `<a> href` tag to:
+
+```html {2}
+<a 
+    href="https://fr.wikipedia.org/wiki/Rickroll"
+    data-twomi18n="click-here link-target[href]"
+>
+    Cliquez ici
+</a>
+```
+
+This behavior allows you to dynamically change **href targets** based on the language.
+
+> Find an example [here](https://qrcode.nicolasrenault.com) - [Code](https://github.com/NicolasRenault/qrcode-prevention/blob/main/src/pages/index.astro).
+
+## Extend the librairy
+
+### `handleTranslation(lang)` method
+
+Encapsulate all the changes you want to do on the Javascript event that trigger the translation to a method like `handleTranslation(lang)`.
+
+This way, you can regroup all the changes you apply to your page in a single method.
+
+> Find an example [here](/usages/frameworks#go-further).
+
+### Impact the page style
+
+Sometimes you want to impact the style, like showing or hiding some section of you page, based of the language.
+
+In your `handleTranslation(lang)` method, you can add this line of code:
+
+```js
+document.documentElement.lang = lang;
+```
+
+This will change the `lang` attribute of your `<html>` tag to:
+
+```html
+<html lang="en">
+```
+
+Now let's create some `CSS classes` to impact the page style, like `.show-{lang}`:
+
+```css
+/* Hide based on language */
+html:lang(fr) .show-en { /* Only show when {lang} is set to "en" */
+    display: none;
+}
+html:lang(en) .show-fr { /* Only show when {lang} is set to "fr" */
+    display: none;
+}
+```
+You can add `.show-{lang}` to any `HTML Element` to only show them when the {"{lang}"} is the selected one.
+
+> Find an example [here](https://nicolasrenault.com) - [Code](https://github.com/NicolasRenault/portfolio/blob/main/src/styles/global.css).
+
+### Navigation
+
+Since the librairy is designed to run on the client, there is  no native way to pass the current language to the next page.
+
+One easy implementation would be to use the [`URLParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/URLSearchParams) and pass the language here.
+
+```bash {/* Using Bash for text highlighting on the page*/}                                      
+https://www.nicolasrenault.com/?lang=fr
+```
+
+We are still facing two issues:
+
+- Our navigation links don't have the language information.
+- On page load, we do not check the `lang` in the `URL`.
+
+Let's fix that!
+
+#### Dynamically update the links
+
+This one requires a little more work.
+
+First, you are going to define a new **data attribute**: `[data-link]`, and add it to any navigation links within your site.
+
+```html {3}
+<a
+    href="/"
+    data-link
+    data-twomi18n="navbar.homepage"
+>
+    Homepage
+</a>
+```
+
+Next, in the same place you created the `handleTranslation(lang)` method, add a new method called `changeLinkLangParam(lang)`:
+
+```js
+/**
+ * Change the href of all link in the page that have data-link.
+ * This is used for link that navigate the different pages, not the external links.
+ *
+ * @param lang
+ */
+function changeLinkLangParam(lang) {
+    const anchors = document.querySelectorAll("[data-link]");
+
+    anchors.forEach((anchor) => {
+        let url = new URL(anchor.href);
+        url.searchParams.set("lang", lang);
+        anchor.href = url.toString();
+    });
+}
+```
+
+This method is going to query through all the HTML elements with the `[data-link]` attribute, and add the `lang={lang}` param to its `href` url:
+
+```html {2}
+<a
+    href="/?lang=fr"
+    data-link
+    data-twomi18n="navbar.homepage"
+>
+    Homepage
+</a>
+```
+
+#### Check `lang` from `URL` on page load
+
+Now that all of the navigation links contains the language information, we need to tell your page to check the `lang` from the `URL` on page load.
+
+Create a new method in the same place called `getLangFromURL()`:
+
+```js
+/**
+ * Check in the URL if the {lang} param exist.
+ * If so, call @handleTranslation
+ */
+function getLangFromURL() {
+    const params = new URLSearchParams(document.location.search);
+
+    if (params.size !== 0) {
+        const lang = params.get("lang");
+        if (lang in translations) handleTanslation(lang);
+    }
+}
+```
+
+This method checks the `lang` param from the `URLParams`. If it finds it, it calls the `handleTanslation(lang)` method to trigger the translations.
+
+Call this method once in your Javascript.
+
+```js
+getLangFromURL(); //Triggered once on load
+```
+
+> Find an example [here](https://nicolasrenault.com) - [Code](https://github.com/NicolasRenault/portfolio/blob/main/src/components/Translations.astro).

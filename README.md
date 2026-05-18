@@ -179,10 +179,14 @@ You can translate multiple attributes by separating them with a space.
 	twoMi18n.translateHTML("fr");
 </script>
 ```
-<!-- TODO Change/Remove CodeSandbox link? -->
 See a full working example:
 
 [![Two Mi18n example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/bold-snowflake-tt6chr)
+
+You can find real world projects examples:
+
+- [My personal portfolio](https://nicolasrenault.com) - [See code](https://github.com/NicolasRenault/portfolio)
+- [QrCode Prevention](https://qrcode.nicolasrenault.com) - [See code](https://github.com/NicolasRenault/qrcode-prevention)
 
 See the full documentation on [twomi18n.nicolasrenault.com](https://twomi18n.nicolasrenault.com/).
 
