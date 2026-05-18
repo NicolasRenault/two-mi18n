@@ -1,0 +1,145 @@
+---
+title: Frameworks
+---
+
+The Two Mi18n library is designed to work with a script tag, which can be head-scratching to set up in some Javascript Frameworks.
+
+You can find examples of usage for specific frameworks below.
+
+## Astro
+
+> I made my own [portfolio](https://nicolasrenault.com) with [Astro](https://astro.build) and the `Two Mi18n` library. You can find the code [here](https://github.com/NicolasRenault/portfolio).
+
+### Initialization
+
+> In Astro, it's good practice to use a component like [`Translations.astro`](https://github.com/NicolasRenault/portfolio/blob/main/src/components/Translations.astro) to encapsulate the library code. 
+
+Create an `Astro component` and add the `<script> tag` to your page. Here we called it `Translations.astro`.
+
+```astro {5, 10, 11 , 12, 14}
+---
+
+---
+
+<script defer src="https://unpkg.com/two-mi18n@latest/dist/TwoMi18n.umd.js"></script>
+
+[...]
+
+<script>
+	const translations = {
+        //Create translation object here
+    }
+
+    const twoMi18n = new TwoMi18n(translations); //Initialize TwoMi18n object.
+</script>
+```
+
+Add this component to each of your pages or to your Layout based on your needs.
+
+> In the **portfolio example**, I have added it to my [`NavBar.astro`](https://github.com/NicolasRenault/portfolio/blob/main/src/components/Navbar.astro), which is called in my [`MainLayout.astro`](https://github.com/NicolasRenault/portfolio/blob/main/src/layouts/MainLayout.astro).
+
+```astro {2, 9}
+---
+import Translations from "@components/Translations.astro";
+
+[...]
+
+---
+
+[...]
+    <Translations />
+[...]
+
+```
+
+### Usage
+
+#### Create an HTML Element
+
+Add an `HTML Element` in your Astro component. It can be a `<select>`, a `<button>`, or any element that can be triggered with Javascript.
+
+> In the **portfolio example**, I used two `<button>` tags to switch from English to French.
+
+```html {2, 4}
+<div id="translation-container" class="grid grid-flow-col gap-1">
+	<button id="translation-button-en">EN</button>
+	[...]
+	<button id="translation-button-fr">FR</button>
+</div>
+``` 
+
+#### Handle the Javascript
+
+Use the `<script>` tag in your Astro component. Inside, we are going to catch the user interaction from our `HTML Element` and call the `translateHTML()` method accordingly.
+
+```go {16, 17, 20, 23} {/* Using GoLang for text highlighting on the page*/}
+[...]
+
+<script>
+    const translations = {
+        default: "en",
+        en: {
+            [...]
+        },
+        fr: {
+            [...]
+        },
+    }
+
+    const twoMi18n = new TwoMi18n(translations);
+
+    const buttonEN = document.getElementById("translation-button-en");
+    const buttonFR = document.getElementById("translation-button-fr");
+
+    buttonEN?.addEventListener("click", () => {
+        twoMi18n.translateHTML("en");
+    });
+    buttonFR?.addEventListener("click", () => {
+        twoMi18n.translateHTML("fr");
+    });
+</script>
+```
+
+#### Go Further
+
+In the **portfolio example**, I have create a `handleTanslation(lang)` method to add more functionalities like disabling buttons, add the lang to the page `<html>` and to the `url`.
+
+> Learn more about [Tips and Use Cases](/usages/tips-and-use-cases).
+
+```js
+/**
+ * Handle all the changes needed for the translations
+ *  - Lang selector
+ *  - Add ?lang={lang} to URL Parameters
+ *  - Call TwoMi18n function
+ *
+ * @param lang
+ */
+function handleTanslation(lang) {
+    if (lang === "en") {
+        buttonEN.setAttribute("disabled", true);
+        buttonFR.removeAttribute("disabled");
+
+        window.history.replaceState("lang", null, "?lang=en");
+    } else if (lang === "fr") {
+        buttonEN.removeAttribute("disabled");
+        buttonFR.setAttribute("disabled", true);
+
+        window.history.replaceState("lang", null, "?lang=fr");
+    }
+
+    //Set <html> lang (Used as a signal for translation for other javascript tags)
+    document.documentElement.lang = lang;
+
+    changeLinkLangParam(lang);
+    twoMi18n.translateHTML(lang);
+}
+```
+
+> You can find this working example [here](https://github.com/NicolasRenault/portfolio).
+
+## Other Frameworks
+
+I haven't been able to test the library with other frameworks since I'm not really familiar with any of those. However, you can take inspiration from the examples above.
+
+Feel free to test it yourself and [contact me](https://contact.nicolasrenault.com) if you need help, or [add a section](https://github.com/NicolasRenault/two-mi18n/fork) to this documentation if you implement it in another Javascript Frameworks.

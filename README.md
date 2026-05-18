@@ -179,12 +179,42 @@ You can translate multiple attributes by separating them with a space.
 	twoMi18n.translateHTML("fr");
 </script>
 ```
-
 See a full working example:
 
 [![Two Mi18n example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/bold-snowflake-tt6chr)
 
+You can find real world projects examples:
+
+- [My personal portfolio](https://nicolasrenault.com) - [See code](https://github.com/NicolasRenault/portfolio)
+- [QrCode Prevention](https://qrcode.nicolasrenault.com) - [See code](https://github.com/NicolasRenault/qrcode-prevention)
+
 See the full documentation on [twomi18n.nicolasrenault.com](https://twomi18n.nicolasrenault.com/).
+
+## Helper Script
+
+Automatically extract translation keys from your project to generate your JSON translation object.
+
+Using the script is as minimalist as the library itself. Simply pass the path of your project folder to the command. It will go recursively through all the files from there.
+
+```bash frame="none"
+curl -fsSL https://two-mi18n.helper-script.nicolasrenault.com/install.sh | sh
+```
+
+```bash frame="none"
+twomi18n-helper-script ./src
+```
+
+Running the script will generate the language array for the `translation object` for you:
+
+```json
+{
+    "homepage": "Homepage",
+    "contact-me": "Contact me",
+    "contact-button": ""
+}
+```
+
+Learn more about the `helper-script` [here](https://www.twomi18n.nicolasrenault.com/go-further/helper-script).
 
 ## Contribute
 

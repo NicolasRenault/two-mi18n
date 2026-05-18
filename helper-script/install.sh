@@ -2,21 +2,30 @@
 set -e
 
 # Config
-BASE_URL="https://dl.yourdomain.com/mycli/latest" #TODO Change when ready to move to prod
-BINARY_NAME="mycli"
+BASE_URL="http://two-mi18n.helper-script.nicolasrenault.com/"
+BINARY_NAME="two-mi18n-helper-script"
 
-# 1. Detect OS/Arch
-OS=$(uname -s | tr '[:upper:]' '[:lower:]')
-ARCH=$(uname -m)
-
-case "$ARCH" in
-    x86_64) ARCH="amd64" ;;
-    arm64|aarch64) ARCH="arm64" ;;
+# Detect OS
+OS_RAW="$(uname -s | tr '[:upper:]' '[:lower:]')"
+case "$OS_RAW" in
+    linux*)   OS="linux" ;;
+    darwin*)  OS="darwin" ;;
+    mingw*|msys*|cygwin*) OS="windows" ;; # Standardizes all Windows environments
+    *) echo "Unsupported OS: $OS_RAW" && exit 1 ;;
 esac
 
-# 2. Formulate download name
+# Detect Architecture
+ARCH_RAW="$(uname -m)"
+case "$ARCH_RAW" in
+    x86_64|amd64) ARCH="amd64" ;;
+    aarch64|arm64) ARCH="arm64" ;;
+    *) echo "Unsupported architecture: $ARCH_RAW" && exit 1 ;;
+esac
+
+# Now REMOTE_FILE will correctly be "two-mi18n-helper-script-windows-amd64.exe"
 REMOTE_FILE="${BINARY_NAME}-${OS}-${ARCH}"
-if [ "$OS" = "mingw" ] || [ "$OS" = "msys" ]; then
+
+if [ "$OS" = "windows" ]; then
     REMOTE_FILE="${REMOTE_FILE}.exe"
 fi
 
