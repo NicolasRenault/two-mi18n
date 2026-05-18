@@ -40,5 +40,8 @@ sha256sum * > checksums.txt
 
 # Copy install.sh to dist folder
 cp ../../install.sh ./
+echo "Copied install.sh"
+cp ../../index.html ./
+echo "Copied index.html"
 
 echo "Build complete! Files are in $DIST_DIR"
