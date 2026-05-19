@@ -1,0 +1,147 @@
+---
+import Layout from "@layouts/MainLayout.astro";
+
+const openToWork = true;
+---
+
+<Layout>
+	<main>
+		<header>
+			<nr-logo size="xl" animated></nr-logo>
+			<h1>Nicolas Renault</h1>
+		</header>
+        <div id="contact">
+            <p>Hey!</p>
+            <p>Feel free to reach out if you need help with one of my open-source software, discuss one of my projects, or just have a chat.</p>
+            {openToWork &&
+                <p>I'm currently open to collaboration or work offers.</p>
+            }
+        </div>
+        <div id="email">
+            <h2>Copy my email:</h2>
+            <button id="contact-button" title="Copy my email">contact.nicolasrenault@gmail.com</button>
+        </div>
+	</main>
+    <div id="links">
+        <a href="/">See all my links</a>
+    </div>
+</Layout>
+
+<style lang="scss">
+    #contact {
+        max-width: 45ch;
+        font-size: 1.5rem;
+    }
+
+    #email {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        margin: 10rem 0;
+    }
+
+    #contact-button {
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+		width: fit-content;
+        text-decoration: none;
+        overflow: hidden;
+        
+        color: var(--text-rgb);
+        font-size: 1.5rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        cursor: pointer;
+
+        background-color: transparent;
+        border: none;
+
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 2;
+
+            width: 100%;
+            height: 0%;
+
+            -moz-transition: height 0.5s ease-in-out;
+            -webkit-transition: height 0.5s ease-in-out;
+            -o-transition: height 0.5s ease-in-out;
+            transition: height 0.5s ease-in-out;
+        }
+
+        &.success::before{
+            height: 100%;
+            content: "Copied!";
+            background-color: var(--secondary-light-rgb);
+        }
+
+        &.error::before{
+            height: 100%;
+            content: "Error";
+            background-color: #ff1414;
+        }
+
+
+        &::after {
+            content: "";
+			position: absolute;
+			width: 98%;
+			height: 3px;
+			left: 5px;
+			bottom: -1px;
+			background: var(--secondary-rgb);
+			z-index: 1;
+        }
+
+        &:hover {
+			transform: matrix(1, 0, 0, 1, 0, -1);
+		}
+    }
+
+    #links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        a {
+            font-size: 1.5rem;
+            color: var(--secondary-light-rgb);
+        }
+    }
+</style>
+
+<script>
+	const contactButton = document.getElementById("contact-button");
+
+    contactButton?.addEventListener("click", () => {
+        if (contactButton.classList.contains("clicked")) return;
+        try {
+            navigator.clipboard.writeText("contact.nicolasrenault@gmail.com");
+            handleCopyResult(true);
+        } catch (error) {
+            console.error("Error when copying mail to clipboard:" + error);
+            handleCopyResult(false);
+        }
+    });
+
+    /**
+     * Add classes and change innerText of contactButton based on isSuccess
+     *
+     * @see contactButton
+     * @param isSuccess
+     */
+    function handleCopyResult(isSuccess: boolean) {
+        let classToAdd = isSuccess ? "success" : "error";
+
+        contactButton?.classList.add(classToAdd);
+
+        setTimeout(() => {
+            contactButton?.classList.remove(classToAdd);
+        }, 2000);
+    }
+</script>

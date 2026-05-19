@@ -5,11 +5,11 @@ import ProjectCard from "@components/ProjectCard.astro";
 ---
 <Layout>
 	<main>
-		<div id="header">
+		<header>
 			<nr-logo size="xl" animated></nr-logo>
 			<h1>Nicolas Renault</h1>
 			<h2>Find all my links here.</h2>
-		</div>
+		</header>
 		<div id="links">
 			{
 				links.map((link) => 
@@ -18,64 +18,17 @@ import ProjectCard from "@components/ProjectCard.astro";
 						description={link.description}
 						icon={link.icon}
 						href={link.href}
-						isButton={link.isButton}
 					/>
 				)
 			}
 		</div>
-		<footer>
-			<p>This is an open source project that you can find <a href="https://github.com/NicolasRenault/links" target="_blank">here</a>.</p>
-			<nr-logo size="xs" link animated></nr-logo>
-		</footer>
 	</main>
 </Layout>
 
 <style lang="scss">
 	main {
-		#header {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			margin: 5vh 0;
-
-			nr-logo {
-				color: var(--secondary-rgb);
-				filter: drop-shadow(0 0 1.85rem var(--secondary-rgb));
-				margin-bottom: 10px;
-			}
-
-			h1 {
-				font-size: 3rem;
-			}
-
-			h2 {
-				font-size: 1.5rem;
-				font-weight: 500;
-				margin-top: 0;
-			}
-		}
-
 		#links {
 			min-width: 580px;
-		}
-
-		footer {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-
-			margin-top: 10vh;
-			margin: 5vw;
-			
-			color: var(--text-dark-gray-rgb);
-
-			p {
-				font-size: 1.2rem;
-				text-align: center;
-				a {
-					color: var(--secondary-dark-rgb);
-				}
-			}
 		}
 	}
 
@@ -89,20 +42,4 @@ import ProjectCard from "@components/ProjectCard.astro";
 			}
 		}
 	}
-
-	@media (max-width: 519px) {
-		main
-		{
-			#header {
-				h1 {
-					font-size: 2.5rem;
-				}
-
-				h2 {
-					font-size: 1.3rem;
-				}
-			}
-		}
-	}
-
 </style>

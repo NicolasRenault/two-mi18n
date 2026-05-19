@@ -12,6 +12,10 @@ import Blob from "@components/Blob.astro";
 	<body>
 		<section id="main">
 			<slot />
+			<footer>
+				<p>This is an open source project that you can find <a href="https://github.com/NicolasRenault/links" target="_blank">here</a>.</p>
+				<nr-logo size="xs" link animated></nr-logo>
+			</footer>
 		</section>
 		<Blob/>
 		<GrainyFilter />

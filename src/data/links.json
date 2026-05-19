@@ -21,8 +21,7 @@
         "title": "Contact me",
         "description": "contact.nicolasrenault@gmail.com - Feel free to reach!",
         "icon": "https://cdn.nicolasrenault.com/static/gmail.ico",
-        "href": "copy contact.nicolasrenault@gmail.com",
-        "isButton": true
+        "href": "/contact"
     },
     {
         "title": "Strava",

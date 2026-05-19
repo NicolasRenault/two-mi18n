@@ -7,10 +7,9 @@ export interface Props {
 	icon: string;
 	href: string;
 	description: string;
-	isButton?: boolean;
 }
 
-const {title, icon, href, description, isButton} = Astro.props;
+const {title, icon, href, description} = Astro.props;
 const cleanedTitle = title.toLocaleLowerCase().replaceAll(" ", "-");
 const randomDeg = Math.floor(Math.random() * 180) + "deg";
 ---
@@ -27,35 +26,17 @@ const randomDeg = Math.floor(Math.random() * 180) + "deg";
 					{icon && <Image src={icon} alt={`${title} icon`} width="32" height="32" />}
 					<h3>{title}</h3>
 				</div>
-
 				{description && <p class="description">{description}</p>}
-
-				{
-					isButton && 
-					<button 
-						id={cleanedTitle + "-button"}
-						onclick={"handleButton('" + href + "')"}
-						class="main-link"
-						title={title + " | " + description}
-					>
-						<!-- Need to extract the main link and display it on top of the text to avoid weird Astro rendering -->
-						<!-- See https://github.com/withastro/astro/issues/4864 -->
-					</button>
-				}
-				{
-					!isButton &&
-					<a
-						href={href}
-						title={title + " | " + description}
-						aria-label={title + " | " + description}
-						class="main-link"
-						target="_blank"
-					>
-						<!-- Need to extract the main link and display it on top of the text to avoid weird Astro rendering -->
-						<!-- See https://github.com/withastro/astro/issues/4864 -->
-					</a>
-				}
-				
+				<a
+					href={href}
+					title={title + " | " + description}
+					aria-label={title + " | " + description}
+					class="main-link"
+					target={href.includes("http") ? "_blank" : ""}
+				>
+					<!-- Need to extract the main link and display it on top of the text to avoid weird Astro rendering -->
+					<!-- See https://github.com/withastro/astro/issues/4864 -->
+				</a>
 			</div>
 		</div>
 	</div>
@@ -261,29 +242,6 @@ const randomDeg = Math.floor(Math.random() * 180) + "deg";
 				setTimeout(() => {
 					animate();
 				}, 30);
-			}
-		}
-	}
-</script>
-
-<script is:inline>
-	/**
-	 * Handle button behavior based on params.
-	 * 
-	 * @param param [string] Param for button behavior in formation "[action] [actionParam]".
-	 */
-	function handleButton(param) {
-		const params = param.split(" ");
-		const action = params[0];
-		const actionParam = params[1];
-
-		if(action === "copy") {
-			try {
-				navigator.clipboard.writeText(actionParam);
-				alert(actionParam + " copied to clipboard.")
-			} catch (error) {
-				console.error("Error when copying " + actionParam + " to clipboard:" + error);
-				alert("Error when copying " + actionParam + " to clipboard:" + error);
 			}
 		}
 	}
