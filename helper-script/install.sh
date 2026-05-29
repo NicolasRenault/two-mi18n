@@ -2,7 +2,7 @@
 set -e
 
 # Config
-BASE_URL="http://two-mi18n.helper-script.nicolasrenault.com/"
+BASE_URL="http://two-mi18n-helper-script.nicolasrenault.com/"
 BINARY_NAME="two-mi18n-helper-script"
 
 # Detect OS

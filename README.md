@@ -197,7 +197,7 @@ Automatically extract translation keys from your project to generate your JSON t
 Using the script is as minimalist as the library itself. Simply pass the path of your project folder to the command. It will go recursively through all the files from there.
 
 ```bash frame="none"
-curl -fsSL https://two-mi18n.helper-script.nicolasrenault.com/install.sh | sh
+curl -fsSL https://two-mi18n-helper-script.nicolasrenault.com/install.sh | sh
 ```
 
 ```bash frame="none"

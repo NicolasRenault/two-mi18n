@@ -12,7 +12,7 @@ That's why I created the **helper-script** to solve this. It crawls your project
 Following the concept of the library, I tried my best to make the helper-script minimal and lightweight. You can install the pre-compiled binary for macOS, Linux, or Windows using a simple one-liner in your terminal:
 
 ```bash frame="none"
-curl -fsSL https://two-mi18n.helper-script.nicolasrenault.com/install.sh | sh
+curl -fsSL https://two-mi18n-helper-script.nicolasrenault.com/install.sh | sh
 ```
 
 > The script will automatically detect your OS and architecture, and install the `twomi18n-helper-script` command to your terminal.
