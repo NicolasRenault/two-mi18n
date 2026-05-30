@@ -214,7 +214,7 @@ Running the script will generate the language array for the `translation object`
 }
 ```
 
-Learn more about the `helper-script` [here](https://www.twomi18n.nicolasrenault.com/go-further/helper-script).
+Learn more about the `helper-script` [here](https://twomi18n.nicolasrenault.com/go-further/helper-script).
 
 ## Contribute
 
