@@ -1,4 +1,7 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/dbe42234-6022-415d-98b8-b2fbc63dcf39/deploy-status)](https://app.netlify.com/projects/famous-speculoos-ab7533/deploys)
+[![Built with Astro](https://astro.badg.es/v2/built-with-astro/tiny.svg)](https://astro.build)
+
+![Static Badge](https://img.shields.io/badge/Self_hosted-%236B16ED?style=for-the-badge&logo=coolify)
+![Static Badge](https://img.shields.io/badge/Mirrored_from-Forgejo-%23FB923C?style=for-the-badge&logo=forgejo)
 
 
 A list of all my links, using Astro.
