@@ -1,3 +1,5 @@
+![Static Badge](https://img.shields.io/badge/Mirrored_from-Forgejo-%23FB923C?style=for-the-badge&logo=forgejo)
+
 # two-mi18n
 
 > Minimalist Javascript library for internationalization in only two methods. Too minimalist.
