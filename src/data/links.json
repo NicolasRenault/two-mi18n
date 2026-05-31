@@ -2,7 +2,7 @@
     {
         "title": "nicolasrenault.com",
         "description": "My personal website.",
-        "icon": "https://www.cdn.nicolasrenault.com/logo/NR_Logo_dark_mode.svg",
+        "icon": "https://cdn.nicolasrenault.com/logo/NR_logo_dark_mode.svg",
         "href": "https://nicolasrenault.com"
     },
     {
@@ -15,7 +15,7 @@
         "title": "LinkedIn",
         "description": "Let's connect!",
         "icon": "https://cdn.nicolasrenault.com/static/linkedin.ico",
-        "href": "https://www.linkedin.com/in/nicolas-renault-6388191a5/"
+        "href": "https://linkedin.com/in/nicolas-renault-6388191a5/"
     },
     {
         "title": "Contact me",
@@ -27,6 +27,6 @@
         "title": "Strava",
         "description": "Follow my cycling adventures.",
         "icon": "https://cdn.nicolasrenault.com/static/strava.png",
-        "href": "https://www.strava.com/athletes/131396980"
+        "href": "https://strava.com/athletes/131396980"
     }
 ]
